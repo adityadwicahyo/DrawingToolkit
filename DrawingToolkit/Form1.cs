@@ -33,9 +33,15 @@ namespace DrawingToolkit
 
         // Line
         private Point preCoor, newCoor;
+        //List <Point> preCoorArray, newCoorArray;
 
         // Rectangle
         int width, height;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         // Reset Button
         void reset()
@@ -113,17 +119,18 @@ namespace DrawingToolkit
             {
                 if (line == true)
                 {
+                    this.Refresh();
                     ControlPaint.DrawReversibleLine(panel1.PointToScreen(preCoor), panel1.PointToScreen(newCoor), wrn1);
                     newCoor = new Point(e.X, e.Y);
-                    ControlPaint.DrawReversibleLine(panel1.PointToScreen(preCoor), panel1.PointToScreen(newCoor), wrn1);
+                    //ControlPaint.DrawReversibleLine(panel1.PointToScreen(preCoor), panel1.PointToScreen(newCoor), wrn1);
                 }
 
                 else if (rectang == true)
                 {
                     this.Refresh();
                     p.Width = tebal;
-                    width = e.X - initialX;
-                    height = e.Y - initialY;
+                    //width = e.X - initialX;
+                    //height = e.Y - initialY;
                     Rectangle rect = new Rectangle(Math.Min(e.X, initialX),
                         Math.Min(e.Y, initialY),
                         Math.Abs(e.X - initialX),
@@ -135,8 +142,8 @@ namespace DrawingToolkit
                 {
                     this.Refresh();
                     p.Width = tebal;
-                    cirW = Math.Abs(e.X - initialX);
-                    cirL = Math.Abs(e.Y - initialY);
+                    //cirW = Math.Abs(e.X - initialX);
+                    //cirL = Math.Abs(e.Y - initialY);
                     Rectangle rec = new Rectangle(Math.Min(e.X, initialX),
                         Math.Min(e.Y, initialY),
                         Math.Abs(e.X - initialX),
