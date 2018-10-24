@@ -3,44 +3,114 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace DrawingToolkit.Shapes
 {
-    public class Line
+    public class Line : DrawingObject
     {
-        private Point preCoor;
-        private Point newCoor;
-        private double px, py, vector, angle;
-        int tebal, initialX, initialY;
+        private const double EPSILON = 3.0;
 
-        private Pen p;
+        public Point Startpoint { get; set; }
+        public Point Endpoint { get; set; }
 
-        private Graphics objGraphic;
+        private Pen pen;
 
-        public void rumusline()
+        public Line()
         {
-            p = new Pen(Color.Black);
-            tebal = 5;
-            px = newCoor.X;
-            py = newCoor.Y;
-            vector = Math.Sqrt((Math.Pow(px, 2)) + (Math.Pow(py, 2)));
-            angle = Math.Atan(py / px) * 180 / Math.PI;
+            this.pen = new Pen(Color.Black);
+            pen.Width = 1.5f;
+
         }
 
-        public void rumusline(Point startpoint)
+        public Line(Point startpoint) :
+            this()
         {
-            this.preCoor = startpoint;
+            this.Startpoint = startpoint;
         }
 
-        public void rumusline(Point startpoint, Point endpoint)
+        public Line(Point startpoint, Point endpoint) :
+            this(startpoint)
         {
-            this.newCoor = endpoint;
+            this.Endpoint = endpoint;
         }
 
-        public void Draw()
+        public override void RenderOnStaticView()
         {
-            this.objGraphic.DrawLine(this.p, preCoor, newCoor);
+            pen.Color = Color.Black;
+            pen.Width = 1.5f;
+            pen.DashStyle = DashStyle.Solid;
+
+            if (this.GetGraphics() != null)
+            {
+                this.GetGraphics().SmoothingMode = SmoothingMode.AntiAlias;
+                this.GetGraphics().DrawLine(pen, this.Startpoint, this.Endpoint);
+            }
+        }
+
+        public override void RenderOnEditingView()
+        {
+            pen.Color = Color.Blue;
+            pen.Width = 1.5f;
+            pen.DashStyle = DashStyle.Solid;
+
+            if (this.GetGraphics() != null)
+            {
+                this.GetGraphics().SmoothingMode = SmoothingMode.AntiAlias;
+                this.GetGraphics().DrawLine(pen, this.Startpoint, this.Endpoint);
+            }
+        }
+
+        public override void RenderOnPreview()
+        {
+            pen.Color = Color.Red;
+            pen.Width = 1.5f;
+            pen.DashStyle = DashStyle.DashDotDot;
+
+            if (this.GetGraphics() != null)
+            {
+                this.GetGraphics().SmoothingMode = SmoothingMode.AntiAlias;
+                this.GetGraphics().DrawLine(pen, this.Startpoint, this.Endpoint);
+
+            }
+        }
+
+        public override bool Intersect(int xTest, int yTest)
+        {
+            double m = GetSlope();
+            double b = Endpoint.Y - m * Endpoint.X;
+            double y_point = m * xTest + b;
+
+            if (Math.Abs(yTest - y_point) < EPSILON)
+            {
+                Debug.WriteLine("Object " + ID + " is selected.");
+                return true;
+            }
+            return false;
+        }
+
+        public double GetSlope()
+        {
+            double m = (double)(Endpoint.Y - Startpoint.Y) / (double)(Endpoint.X - Startpoint.X);
+            return m;
+        }
+
+        public override void Translate(int x, int y, int xAmount, int yAmount)
+        {
+            this.Startpoint = new Point(this.Startpoint.X + xAmount, this.Startpoint.Y + yAmount);
+            this.Endpoint = new Point(this.Endpoint.X + xAmount, this.Endpoint.Y + yAmount);
+        }
+
+        public override bool Add(DrawingObject obj)
+        {
+            return false;
+        }
+
+        public override bool Remove(DrawingObject obj)
+        {
+            return false;
         }
     }
 }
