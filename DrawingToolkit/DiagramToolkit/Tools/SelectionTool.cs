@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiagramToolkit.States;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,10 @@ namespace DiagramToolkit.Tools
 {
     public class SelectionTool : ToolStripButton, ITool
     {
+        private int xInitial;
+        private int yInitial;
         private ICanvas canvas;
+        private DrawingObject currentObject;
 
         public Cursor Cursor
         {
@@ -42,17 +46,45 @@ namespace DiagramToolkit.Tools
 
         public void ToolMouseDown(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            this.xInitial = e.X;
+            this.yInitial = e.Y;
+
+            List<DrawingObject> listObjects = canvas.getListObjects();
+            foreach(DrawingObject obj in listObjects)
+            {
+                if(obj.Intersect(e.Location))
+                {
+                    currentObject = obj;
+                    obj.ChangeState(EditState.GetInstance());
+                    break;
+                }
+                else
+                {
+                    obj.ChangeState(StaticState.GetInstance());
+                    currentObject = null;
+                }
+            }
         }
 
         public void ToolMouseMove(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.Button == MouseButtons.Left && this.currentObject != null)
+            {
+                int xAmount = e.X - xInitial;
+                int yAmount = e.Y - yInitial;
+                xInitial = e.X;
+                yInitial = e.Y;
+                currentObject.Move(e.X, e.Y, xAmount, yAmount);
+
+                currentObject.ChangeState(EditState.GetInstance());
+                canvas.Repaint();
+            }
         }
 
         public void ToolMouseUp(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            //currentObject.ChangeState(StaticState.GetInstance());
+            currentObject = null;
         }
     }
 }

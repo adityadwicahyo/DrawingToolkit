@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DiagramToolkit.Tools
 {
-    public class LineTool : ToolStripButton, ITool
+    public class CircleTool : ToolStripButton, ITool
     {
         private ICanvas canvas;
         private LineSegment lineSegment;
@@ -32,37 +32,24 @@ namespace DiagramToolkit.Tools
             }
         }
 
-        public LineTool()
+        public CircleTool()
         {
-            this.Name = "Line tool";
-            this.ToolTipText = "Line tool";
-            this.Image = IconSet.diagonal_line;
+            this.Name = "Circle tool";
+            this.ToolTipText = "Circle tool";
+            this.Image = IconSet.circle;
             this.CheckOnClick = true;
         }
 
         public void ToolMouseDown(object sender, MouseEventArgs e)
         {
-            lineSegment = new LineSegment(new System.Drawing.Point(e.X, e.Y));
-            this.lineSegment.ChangeState(PreviewState.GetInstance());
         }
 
         public void ToolMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                if (this.lineSegment != null)
-                {
-                    lineSegment.Endpoint = new System.Drawing.Point(e.X, e.Y);
-                    canvas.AddDrawingObject(lineSegment);
-                }
-            }
         }
 
         public void ToolMouseUp(object sender, MouseEventArgs e)
         {
-            lineSegment.Endpoint = new System.Drawing.Point(e.X, e.Y);
-            canvas.AddDrawingObject(lineSegment);
-            this.lineSegment.ChangeState(StaticState.GetInstance());
         }
     }
 }

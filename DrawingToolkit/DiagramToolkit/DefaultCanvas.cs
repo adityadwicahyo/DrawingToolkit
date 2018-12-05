@@ -86,5 +86,10 @@ namespace DiagramToolkit
             this.Repaint();
             Debug.WriteLine("New drawing object");
         }
+
+        public List<DrawingObject> getListObjects()
+        {
+            return drawingObjects;
+        }
     }
 }

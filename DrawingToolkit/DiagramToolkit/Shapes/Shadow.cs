@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;
 
 namespace DiagramToolkit.Shapes
 {
-    public class Rectangle : DrawingObject
+    public class Shadow : DrawingObject
     {
         public int X { get; set; }
         public int Y { get; set; }
@@ -15,20 +15,20 @@ namespace DiagramToolkit.Shapes
         private SolidBrush solidBrush;
         private List<DrawingObject> drawingObjects;
 
-        public Rectangle()
+        public Shadow()
         {
             this.solidBrush = new SolidBrush(Color.Black);
-            //pen.Width = 1.5f;
+            //solidBrush.Width = 1.5f;
             drawingObjects = new List<DrawingObject>();
         }
 
-        public Rectangle(int x, int y) : this()
+        public Shadow(int x, int y) : this()
         {
             this.X = x;
             this.Y = y;
         }
 
-        public Rectangle(int x, int y, int width, int height) : this(x, y)
+        public Shadow(int x, int y, int width, int height) : this(x, y)
         {
             this.Width = width;
             this.Height = height;
@@ -51,8 +51,8 @@ namespace DiagramToolkit.Shapes
 
         public override void RenderOnStaticView()
         {
-            this.solidBrush.Color = Color.Red;
-            //this.pen.DashStyle = DashStyle.Solid;
+            this.solidBrush.Color = Color.Black;
+            //this.solidBrush.DashStyle = DashStyle.Solid;
             //this.pen.Width = 1.5f;
             Graphics.FillRectangle(this.solidBrush, X, Y, Width, Height);
 
@@ -65,7 +65,7 @@ namespace DiagramToolkit.Shapes
 
         public override void RenderOnEditView()
         {
-            this.solidBrush.Color = Color.Blue;
+            this.solidBrush.Color = Color.Black;
             //this.pen.DashStyle = DashStyle.Solid;
             //this.pen.Width = 3.0f;
             Graphics.FillRectangle(this.solidBrush, X, Y, Width, Height);
@@ -80,7 +80,7 @@ namespace DiagramToolkit.Shapes
 
         public override void RenderOnPreview()
         {
-            this.solidBrush.Color = Color.Red;
+            this.solidBrush.Color = Color.Black;
             //this.pen.DashStyle = DashStyle.DashDot;
             //this.pen.Width = 1.5f;
             Graphics.FillRectangle(this.solidBrush, X, Y, Width, Height);

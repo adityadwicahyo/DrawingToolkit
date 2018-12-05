@@ -5,10 +5,10 @@ using System.Windows.Forms;
 
 namespace DiagramToolkit.Tools
 {
-    public class RectangleTool : ToolStripButton, ITool
+    public class ShadowTool : ToolStripButton, ITool
     {
         private ICanvas canvas;
-        private Rectangle rectangle;
+        private Shadow shadow;
 
         public Cursor Cursor
         {
@@ -31,11 +31,11 @@ namespace DiagramToolkit.Tools
             }
         }
 
-        public RectangleTool()
+        public ShadowTool()
         {
-            this.Name = "Rectangle tool";
-            this.ToolTipText = "Rectangle tool";
-            this.Image = IconSet.rectangle;
+            this.Name = "Shadow tool";
+            this.ToolTipText = "Shadow tool";
+            this.Image = IconSet.shadow;
             this.CheckOnClick = true;
         }
 
@@ -43,8 +43,8 @@ namespace DiagramToolkit.Tools
         {
             if (e.Button == MouseButtons.Left)
             {
-                this.rectangle = new Rectangle(e.X, e.Y);
-                this.rectangle.ChangeState(PreviewState.GetInstance());
+                this.shadow = new Shadow(e.X, e.Y);
+                this.shadow.ChangeState(PreviewState.GetInstance());
             }
         }
 
@@ -52,18 +52,18 @@ namespace DiagramToolkit.Tools
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (this.rectangle != null)
+                if (this.shadow != null)
                 {
-                    int width = e.X - this.rectangle.X;
-                    int height = e.Y - this.rectangle.Y;
+                    int width = e.X - this.shadow.X;
+                    int height = e.Y - this.shadow.Y;
 
                     if (width > 0 && height > 0)
                     {
-                        this.rectangle.Width = width;
-                        this.rectangle.Height = height;
+                        this.shadow.Width = width;
+                        this.shadow.Height = height;
                     }
 
-                    canvas.AddDrawingObject(rectangle);
+                    canvas.AddDrawingObject(shadow);
                 }
             }
         }
@@ -72,8 +72,8 @@ namespace DiagramToolkit.Tools
         {
             if (e.Button == MouseButtons.Left)
             {
-                this.canvas.AddDrawingObject(this.rectangle);
-                this.rectangle.ChangeState(StaticState.GetInstance());
+                this.canvas.AddDrawingObject(this.shadow);
+                this.shadow.ChangeState(StaticState.GetInstance());
             }
         }
     }

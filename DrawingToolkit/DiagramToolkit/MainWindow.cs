@@ -11,8 +11,6 @@ namespace DiagramToolkit
     {
         private IToolbox toolbox;
         private ICanvas canvas;
-        private IToolbar toolbar;
-        private IMenubar menubar;
 
         public MainWindow()
         {
@@ -39,40 +37,6 @@ namespace DiagramToolkit
 
             #endregion
 
-            #region Menubar
-
-            Debug.WriteLine("Loading menubar...");
-            this.menubar = new DefaultMenubar();
-            this.Controls.Add((Control)this.menubar);
-
-            DefaultMenuItem fileMenuItem = new DefaultMenuItem("File");
-            this.menubar.AddMenuItem(fileMenuItem);
-
-            DefaultMenuItem newMenuItem = new DefaultMenuItem("New");
-            fileMenuItem.AddMenuItem(newMenuItem);
-            fileMenuItem.AddSeparator();
-            DefaultMenuItem exitMenuItem = new DefaultMenuItem("Exit");
-            fileMenuItem.AddMenuItem(exitMenuItem);
-
-            DefaultMenuItem editMenuItem = new DefaultMenuItem("Edit");
-            this.menubar.AddMenuItem(editMenuItem);
-
-            DefaultMenuItem undoMenuItem = new DefaultMenuItem("Undo");
-            editMenuItem.AddMenuItem(undoMenuItem);
-            DefaultMenuItem redoMenuItem = new DefaultMenuItem("Redo");
-            editMenuItem.AddMenuItem(redoMenuItem);
-
-            DefaultMenuItem viewMenuItem = new DefaultMenuItem("View");
-            this.menubar.AddMenuItem(viewMenuItem);
-
-            DefaultMenuItem helpMenuItem = new DefaultMenuItem("Help");
-            this.menubar.AddMenuItem(helpMenuItem);
-
-            DefaultMenuItem aboutMenuItem = new DefaultMenuItem("About");
-            helpMenuItem.AddMenuItem(aboutMenuItem);
-
-            #endregion
-
             #region Toolbox
 
             // Initializing toolbox
@@ -90,28 +54,11 @@ namespace DiagramToolkit
             this.toolbox.AddSeparator();
             this.toolbox.AddTool(new LineTool());
             this.toolbox.AddTool(new RectangleTool());
+            this.toolbox.AddTool(new CircleTool());
+            this.toolbox.AddTool(new ShadowTool());
             this.toolbox.ToolSelected += Toolbox_ToolSelected;
 
             #endregion
-
-            #region Toolbar
-
-            // Initializing toolbar
-            Debug.WriteLine("Loading toolbar...");
-            this.toolbar = new DefaultToolbar();
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add((Control)this.toolbar);
-
-            ExampleToolbarItem toolItem1 = new ExampleToolbarItem();
-            toolItem1.SetCommand(whiteCanvasBgCmd);
-            ExampleToolbarItem toolItem2 = new ExampleToolbarItem();
-            toolItem2.SetCommand(blackCanvasBgCmd);
-
-            this.toolbar.AddToolbarItem(toolItem1);
-            this.toolbar.AddSeparator();
-            this.toolbar.AddToolbarItem(toolItem2);
-
-            #endregion
-
         }
 
         private void Toolbox_ToolSelected(ITool tool)
