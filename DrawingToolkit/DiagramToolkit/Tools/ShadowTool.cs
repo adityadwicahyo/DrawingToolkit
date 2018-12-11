@@ -1,6 +1,7 @@
 ﻿using DiagramToolkit.Shapes;
 using DiagramToolkit.States;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace DiagramToolkit.Tools
@@ -8,7 +9,6 @@ namespace DiagramToolkit.Tools
     public class ShadowTool : ToolStripButton, ITool
     {
         private ICanvas canvas;
-        private Shadow shadow;
 
         public Cursor Cursor
         {
@@ -43,38 +43,31 @@ namespace DiagramToolkit.Tools
         {
             if (e.Button == MouseButtons.Left)
             {
-                this.shadow = new Shadow(e.X, e.Y);
-                this.shadow.ChangeState(PreviewState.GetInstance());
+                List<DrawingObject> listObjects = canvas.getListObjects();
+                foreach (DrawingObject obj in listObjects)
+                {
+                    if (obj.Intersect(e.Location))
+                    {
+                        if(obj.GetType() == typeof(Rectangle))
+                        {
+                            Rectangle temp = (Rectangle)obj;
+                            temp.setShadow();
+                            canvas.Repaint();
+                        }
+                        break;
+                    }
+                }
             }
         }
 
         public void ToolMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                if (this.shadow != null)
-                {
-                    int width = e.X - this.shadow.X;
-                    int height = e.Y - this.shadow.Y;
-
-                    if (width > 0 && height > 0)
-                    {
-                        this.shadow.Width = width;
-                        this.shadow.Height = height;
-                    }
-
-                    canvas.AddDrawingObject(shadow);
-                }
-            }
+            
         }
 
         public void ToolMouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.canvas.AddDrawingObject(this.shadow);
-                this.shadow.ChangeState(StaticState.GetInstance());
-            }
+            
         }
     }
 }

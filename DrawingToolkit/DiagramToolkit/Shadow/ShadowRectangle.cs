@@ -4,35 +4,29 @@ using System.Drawing.Drawing2D;
 
 namespace DiagramToolkit.Shapes
 {
-    public class Rectangle : DrawingObject
+    public class ShadowRectangle : DrawingObject
     {
         public int X { get; set; }
         public int Y { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-
-        //private Pen pen;
+        
         private SolidBrush solidBrush;
-        private SolidBrush shadowBrush;
         private List<DrawingObject> drawingObjects;
 
-        private bool isShadow = false;
-
-        public Rectangle()
+        public ShadowRectangle()
         {
             this.solidBrush = new SolidBrush(Color.Black);
-            this.shadowBrush = new SolidBrush(Color.Black);
-            //pen.Width = 1.5f;
             drawingObjects = new List<DrawingObject>();
         }
 
-        public Rectangle(int x, int y) : this()
+        public ShadowRectangle(int x, int y) : this()
         {
             this.X = x;
             this.Y = y;
         }
 
-        public Rectangle(int x, int y, int width, int height) : this(x, y)
+        public ShadowRectangle(int x, int y, int width, int height) : this(x, y)
         {
             this.Width = width;
             this.Height = height;
@@ -55,12 +49,8 @@ namespace DiagramToolkit.Shapes
 
         public override void RenderOnStaticView()
         {
-            this.solidBrush.Color = Color.Red;
-            //this.pen.DashStyle = DashStyle.Solid;
-            //this.pen.Width = 1.5f;
-            this.shadowBrush.Color = Color.Black;
-            if (isShadow) Graphics.FillRectangle(this.shadowBrush, X + 15, Y + 15, Width, Height);
-            Graphics.FillRectangle(this.solidBrush, X, Y, Width, Height);   
+            this.solidBrush.Color = Color.Black;
+            Graphics.FillRectangle(this.solidBrush, X, Y, Width, Height);
 
             foreach (DrawingObject obj in drawingObjects)
             {
@@ -71,12 +61,8 @@ namespace DiagramToolkit.Shapes
 
         public override void RenderOnEditView()
         {
-            this.solidBrush.Color = Color.Blue;
-            //this.pen.DashStyle = DashStyle.Solid;
-            //this.pen.Width = 3.0f;
-            this.shadowBrush.Color = Color.Black;
-            if (isShadow) Graphics.FillRectangle(this.shadowBrush, X + 15, Y + 15, Width, Height);
-            Graphics.FillRectangle(this.solidBrush, X, Y, Width, Height);            
+            this.solidBrush.Color = Color.Black;
+            Graphics.FillRectangle(this.solidBrush, X, Y, Width, Height);
 
             foreach (DrawingObject obj in drawingObjects)
             {
@@ -88,23 +74,14 @@ namespace DiagramToolkit.Shapes
 
         public override void RenderOnPreview()
         {
-            this.solidBrush.Color = Color.Red;
-            //this.pen.DashStyle = DashStyle.DashDot;
-            //this.pen.Width = 1.5f;
-            this.shadowBrush.Color = Color.Black;
-            if (isShadow) Graphics.FillRectangle(this.shadowBrush, X + 15, Y + 15, Width, Height);
-            Graphics.FillRectangle(this.solidBrush, X, Y, Width, Height);            
+            this.solidBrush.Color = Color.Black;
+            Graphics.FillRectangle(this.solidBrush, X, Y, Width, Height);
 
             foreach (DrawingObject obj in drawingObjects)
             {
                 obj.SetGraphics(Graphics);
                 obj.RenderOnPreview();
             }
-        }
-
-        public void setShadow()
-        {
-            isShadow = true;
         }
     }
 }
