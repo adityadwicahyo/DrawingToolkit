@@ -62,7 +62,7 @@ namespace DiagramToolkit.Tools
                             //(obj as Rectangle).AddMember(aShadow);
                             //canvas.Repaint();
                             canvas.AddDrawingObjectFirst(aShadow);
-                            GroupShape groupShape = new GroupShape();
+                            ShadowShape groupShape = new ShadowShape();
                             canvas.AddDrawingObjectFirst(groupShape);
                             groupShape.addMember(temp);
                             groupShape.addMember(aShadow);

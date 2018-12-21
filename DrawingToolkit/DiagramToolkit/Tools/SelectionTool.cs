@@ -131,7 +131,7 @@ namespace DiagramToolkit.Tools
             {
                 if (memberGroup.Count() > 0)
                 {
-                    GroupShape groupObject = new GroupShape();
+                    ShadowShape groupObject = new ShadowShape();
                     foreach (DrawingObject obj in memberGroup)
                     {
                         groupObject.addMember(obj);

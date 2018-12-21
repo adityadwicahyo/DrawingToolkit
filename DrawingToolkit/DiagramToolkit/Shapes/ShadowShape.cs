@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DrawingToolkit.DrawingObjectList
 {
-    class GroupShape : DrawingObject
+    class ShadowShape : DrawingObject
     {
         private List<DrawingObject> memberGroup = new List<DrawingObject>();
 
