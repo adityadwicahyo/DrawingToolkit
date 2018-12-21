@@ -70,20 +70,20 @@ namespace DiagramToolkit.Tools
                 //obj.ChangeState(StaticState.GetInstance());
                 if (obj.Intersect(e.Location))
                 {
-                    if (!multiselectProcess)
-                    {
-                        memberGroup.Clear();
-                        if (currentObject != null)
-                        {
-                            currentObject.ChangeState(StaticState.GetInstance());
-                            Console.WriteLine("ajksa");
-                        }
-                    }
-                    else
-                    {
-                        if (!memberGroup.Any() && this.currentObject != null) memberGroup.Add(this.currentObject);
-                        memberGroup.Add(obj);
-                    }
+                    //if (!multiselectProcess)
+                    //{
+                    //    memberGroup.Clear();
+                    //    if (currentObject != null)
+                    //    {
+                    //        currentObject.ChangeState(StaticState.GetInstance());
+                    //        Console.WriteLine("ajksa");
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    if (!memberGroup.Any() && this.currentObject != null) memberGroup.Add(this.currentObject);
+                    //    memberGroup.Add(obj);
+                    //}
 
                     currentObject = obj;
                     obj.ChangeState(EditState.GetInstance());

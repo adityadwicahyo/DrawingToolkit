@@ -106,10 +106,10 @@ namespace DiagramToolkit.Shapes
             Graphics.FillRectangle(this.solidBrush, X, Y, Width, Height);
         }
 
-        public void AddMember(DrawingObject obj)
-        {
-            this.drawingObjects.Add(obj);
-        }
+        //public void AddMember(DrawingObject obj)
+        //{
+        //    this.drawingObjects.Add(obj);
+        //}
 
         public void setShadow()
         {

@@ -34,14 +34,24 @@ namespace DrawingToolkit.DrawingObjectList
         }
         public override void Move(int x, int y, int xAmount, int yAmount)
         {
+            int count = 0;
             foreach (DrawingObject obj in memberGroup)
             {
-                obj.Move(x, y, xAmount, yAmount);
+                obj.SetGraphics(Graphics);
+                if (count == 0)
+                {
+                    obj.Move(x + 15, y+ 15, xAmount, yAmount);
+                }
+                else
+                {
+                    obj.Move(x, y, xAmount, yAmount);
+                }
+                count++;
             }
         }
         public void addMember(DrawingObject obj)
         {
-            this.memberGroup.Add(obj);
+            this.memberGroup.Insert(0, obj);
         }
         public void removeMember(DrawingObject obj)
         {
@@ -50,26 +60,29 @@ namespace DrawingToolkit.DrawingObjectList
 
         public override void RenderOnStaticView()
         {
-            //foreach (DrawingObject obj in memberGroup)
-            //{
-              //  obj.RenderOnStaticView();
-            //}
+            foreach (DrawingObject obj in memberGroup)
+            {
+                obj.SetGraphics(Graphics);
+                obj.RenderOnStaticView();
+            }
         }
 
         public override void RenderOnEditView()
         {
-            //foreach (DrawingObject obj in memberGroup)
-            //{
-              //  obj.RenderOnEditView();
-            //}
+            foreach (DrawingObject obj in memberGroup)
+            {
+                obj.SetGraphics(Graphics);
+                obj.RenderOnEditView();
+            }
         }
 
         public override void RenderOnPreview()
         {
-            //foreach (DrawingObject obj in memberGroup)
-            //{
-              //  obj.RenderOnPreview();
-            //}
+            foreach (DrawingObject obj in memberGroup)
+            {
+                obj.SetGraphics(Graphics);
+                obj.RenderOnPreview();
+            }
         }
     }
 }

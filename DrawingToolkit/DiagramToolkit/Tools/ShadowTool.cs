@@ -59,7 +59,14 @@ namespace DiagramToolkit.Tools
                             ShadowRectangle aShadow = new ShadowRectangle(xShadow, yShadow);
                             aShadow.Width = widthShadow;
                             aShadow.Height = heightShadow;
-                            (obj as Rectangle).AddMember(aShadow);
+                            //(obj as Rectangle).AddMember(aShadow);
+                            //canvas.Repaint();
+                            canvas.AddDrawingObjectFirst(aShadow);
+                            GroupShape groupShape = new GroupShape();
+                            canvas.AddDrawingObjectFirst(groupShape);
+                            groupShape.addMember(temp);
+                            groupShape.addMember(aShadow);
+                            canvas.AddDrawingObject(groupShape);
                             canvas.Repaint();
                         }
                         break;
