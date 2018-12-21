@@ -29,6 +29,8 @@ namespace DiagramToolkit
             this.MouseUp += DefaultCanvas_MouseUp;
             this.MouseMove += DefaultCanvas_MouseMove;
 
+            this.KeyDown += DefaultCanvas_HotkeysDown;
+            this.KeyUp += DefaultCanvas_HotkeysUp;
         }
 
         private void DefaultCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -52,6 +54,22 @@ namespace DiagramToolkit
             if (this.activeTool != null)
             {
                 this.activeTool.ToolMouseDown(sender, e);
+            }
+        }
+
+        private void DefaultCanvas_HotkeysDown(object sender, KeyEventArgs e)
+        {
+            if (this.activeTool != null)
+            {
+                this.activeTool.ToolHotKeysDown(sender, e);
+            }
+        }
+
+        private void DefaultCanvas_HotkeysUp(object sender, KeyEventArgs e)
+        {
+            if (this.activeTool != null)
+            {
+                this.activeTool.ToolHotKeysUp(sender, e);
             }
         }
 
@@ -83,6 +101,15 @@ namespace DiagramToolkit
         public void AddDrawingObject(DrawingObject drawingObject)
         {
             this.drawingObjects.Add(drawingObject);
+            this.Repaint();
+            Debug.WriteLine("New drawing object");
+        }
+
+        public void AddDrawingObjectFirst(DrawingObject drawingObject)
+        {
+            this.drawingObjects.Reverse();
+            this.drawingObjects.Add(drawingObject);
+            this.drawingObjects.Reverse();
             this.Repaint();
             Debug.WriteLine("New drawing object");
         }

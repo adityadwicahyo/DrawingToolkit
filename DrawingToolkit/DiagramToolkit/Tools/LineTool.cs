@@ -64,5 +64,15 @@ namespace DiagramToolkit.Tools
             canvas.AddDrawingObject(lineSegment);
             this.lineSegment.ChangeState(StaticState.GetInstance());
         }
+
+        public void ToolHotKeysDown(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ToolHotKeysUp(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

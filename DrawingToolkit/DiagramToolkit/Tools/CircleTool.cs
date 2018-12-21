@@ -51,5 +51,15 @@ namespace DiagramToolkit.Tools
         public void ToolMouseUp(object sender, MouseEventArgs e)
         {
         }
+
+        public void ToolHotKeysDown(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ToolHotKeysUp(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

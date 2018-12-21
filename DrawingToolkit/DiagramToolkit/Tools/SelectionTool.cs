@@ -1,4 +1,5 @@
 ﻿using DiagramToolkit.States;
+using DrawingToolkit.DrawingObjectList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace DiagramToolkit.Tools
         private int yInitial;
         private ICanvas canvas;
         private DrawingObject currentObject;
+
+        private Boolean multiselectProcess = false;
+        private List<DrawingObject> memberGroup = new List<DrawingObject>();
 
         public Cursor Cursor
         {
@@ -50,10 +54,37 @@ namespace DiagramToolkit.Tools
             this.yInitial = e.Y;
 
             List<DrawingObject> listObjects = canvas.getListObjects();
-            foreach(DrawingObject obj in listObjects)
+            foreach (DrawingObject obj in listObjects)
             {
-                if(obj.Intersect(e.Location))
+                foreach(DrawingObject member in memberGroup)
                 {
+                    if(!multiselectProcess && obj != member)
+                    {
+                        obj.ChangeState(StaticState.GetInstance());
+                    }
+                }
+            }
+
+            foreach (DrawingObject obj in listObjects)
+            {
+                //obj.ChangeState(StaticState.GetInstance());
+                if (obj.Intersect(e.Location))
+                {
+                    if (!multiselectProcess)
+                    {
+                        memberGroup.Clear();
+                        if (currentObject != null)
+                        {
+                            currentObject.ChangeState(StaticState.GetInstance());
+                            Console.WriteLine("ajksa");
+                        }
+                    }
+                    else
+                    {
+                        if (!memberGroup.Any() && this.currentObject != null) memberGroup.Add(this.currentObject);
+                        memberGroup.Add(obj);
+                    }
+
                     currentObject = obj;
                     obj.ChangeState(EditState.GetInstance());
                     break;
@@ -61,9 +92,11 @@ namespace DiagramToolkit.Tools
                 else
                 {
                     obj.ChangeState(StaticState.GetInstance());
-                    currentObject = null;
+                    
                 }
             }
+            canvas.Repaint();
+
         }
 
         public void ToolMouseMove(object sender, MouseEventArgs e)
@@ -85,6 +118,38 @@ namespace DiagramToolkit.Tools
         {
             //currentObject.ChangeState(StaticState.GetInstance());
             currentObject = null;
+        }
+
+        public void ToolHotKeysDown(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine(e.KeyCode);
+            if (e.KeyCode == System.Windows.Forms.Keys.ControlKey)
+            {
+                multiselectProcess = true;
+            }
+            else if (e.KeyCode == System.Windows.Forms.Keys.G)
+            {
+                if (memberGroup.Count() > 0)
+                {
+                    GroupShape groupObject = new GroupShape();
+                    foreach (DrawingObject obj in memberGroup)
+                    {
+                        groupObject.addMember(obj);
+                    }
+                    groupObject.ChangeState(EditState.GetInstance());
+                    this.canvas.AddDrawingObject(groupObject);
+                    this.currentObject = groupObject;
+                    memberGroup.Clear();
+                }
+            }
+        }
+
+        public void ToolHotKeysUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.ControlKey)
+            {
+                multiselectProcess = false;
+            }
         }
     }
 }

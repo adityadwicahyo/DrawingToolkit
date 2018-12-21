@@ -69,7 +69,6 @@ namespace DiagramToolkit.Shapes
                 obj.SetGraphics(Graphics);
                 obj.RenderOnEditView();
             }
-
         }
 
         public override void RenderOnPreview()

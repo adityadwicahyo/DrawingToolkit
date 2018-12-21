@@ -1,5 +1,6 @@
 ﻿using DiagramToolkit.Shapes;
 using DiagramToolkit.States;
+using DrawingToolkit.DrawingObjectList;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -51,7 +52,14 @@ namespace DiagramToolkit.Tools
                         if(obj.GetType() == typeof(Rectangle))
                         {
                             Rectangle temp = (Rectangle)obj;
-                            temp.setShadow();
+                            int xShadow = temp.X + 15;
+                            int yShadow = temp.Y + 15;
+                            int widthShadow = temp.Width;
+                            int heightShadow = temp.Height;
+                            ShadowRectangle aShadow = new ShadowRectangle(xShadow, yShadow);
+                            aShadow.Width = widthShadow;
+                            aShadow.Height = heightShadow;
+                            (obj as Rectangle).AddMember(aShadow);
                             canvas.Repaint();
                         }
                         break;
@@ -68,6 +76,16 @@ namespace DiagramToolkit.Tools
         public void ToolMouseUp(object sender, MouseEventArgs e)
         {
             
+        }
+
+        public void ToolHotKeysDown(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ToolHotKeysUp(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

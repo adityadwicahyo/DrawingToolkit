@@ -14,6 +14,10 @@ namespace DiagramToolkit
         {
             this.Graphics = graphics;
         }
+        public virtual Graphics GetGraphics()
+        {
+            return this.Graphics;
+        }
 
         public DrawingObject()
         {
