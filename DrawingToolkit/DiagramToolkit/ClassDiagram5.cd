@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DiagramToolkit.Shapes.ShadowRectangle" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAABIAAAAAAAEAEAEAAAQAAAAAQAAAAAAAAcAA=</HashCode>
+      <FileName>Shadow\ShadowRectangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiagramToolkit.Shapes.Rectangle" Collapsed="true">
+    <Position X="2" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAgQAAABIAAAAAAAEAEAFAAAQAAAAAYAAAAAAAAcAA=</HashCode>
+      <FileName>Shapes\Rectangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawingToolkit.DrawingObjectList.ShadowShape" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAQCAAAIAABAAAAAAFAAAAAQAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Shapes\ShadowShape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiagramToolkit.DrawingObject" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAQAgAAIAAhgAAAAAEAACACQAAAAAUAAAABAAAAAA=</HashCode>
+      <FileName>DrawingObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiagramToolkit.Shapes.LineSegment" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAIAAAAAAAEgEAAAAAQAAAAAQAAAAEAAAAAg=</HashCode>
+      <FileName>Shapes\LineSegment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiagramToolkit.States.EditState" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAABABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>States\EditState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiagramToolkit.States.PreviewState" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAABABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>States\PreviewState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiagramToolkit.States.StaticState" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAABABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>States\StaticState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiagramToolkit.DrawingState" Collapsed="true">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAEAAAABAAAAAA=</HashCode>
+      <FileName>DrawingState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

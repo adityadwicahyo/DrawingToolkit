@@ -95,7 +95,6 @@
     <Compile Include="Shapes\ShadowShape.cs" />
     <Compile Include="Shapes\LineSegment.cs" />
     <Compile Include="Shapes\Rectangle.cs" />
-    <Compile Include="Shapes\Shadow.cs" />
     <Compile Include="States\EditState.cs" />
     <Compile Include="States\PreviewState.cs" />
     <Compile Include="States\StaticState.cs" />
@@ -139,6 +138,7 @@
     </Compile>
     <None Include="ClassDiagram3.cd" />
     <None Include="ClassDiagram4.cd" />
+    <None Include="ClassDiagram5.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
